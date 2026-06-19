@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank of Human Kindness</title>
+    <title>بانک مهربانی</title>
 </head>
 <body>
-    <h1>Bank of Human Kindness</h1>
-    <p>The project is under development.</p>
-    <p>Welcome to the first version of our website.</p>
+    <h1>بانک مهربانی</h1>
+    <p>از حمایت شما سپاسگزاریم. لطفاً اطلاعات خود را وارد کنید:</p>
+    
+    <form action="https://formspree.io/f/mqazqjvz" method="POST">
+        <label>نام شما:</label><br>
+        <input type="text" name="name" required><br><br>
+        
+        <label>مبلغ کمک (تومان):</label><br>
+        <input type="number" name="amount" required><br><br>
+        
+        <label>توضیحات (اختیاری):</label><br>
+        <textarea name="message"></textarea><br><br>
+        
+        <button type="submit">ارسال درخواست کمک</button>
+    </form>
 </body>
 </html>
