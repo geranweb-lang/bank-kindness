@@ -1,24 +1,55 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>بانک مهربانی</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of Human Kindness</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; max-width: 600px; margin: 40px auto; padding: 20px; }
+        .lang-switch { margin-bottom: 20px; }
+    </style>
 </head>
 <body>
-    <h1>بانک مهربانی</h1>
-    <p>از حمایت شما سپاسگزاریم. لطفاً اطلاعات خود را وارد کنید:</p>
-    
-    <form action="https://formspree.io/f/mqazqjvz" method="POST">
-        <label>نام شما:</label><br>
-        <input type="text" name="name" required><br><br>
+
+    <div class="lang-switch">
+        <button onclick="changeLang('en')">English</button> | 
+        <button onclick="changeLang('fa')">فارسی</button>
+    </div>
+
+    <div id="content">
+        <h1 id="title">Bank of Human Kindness</h1>
+        <p id="desc">A transparent people-powered financial help system.</p>
         
-        <label>مبلغ کمک (تومان):</label><br>
-        <input type="number" name="amount" required><br><br>
-        
-        <label>توضیحات (اختیاری):</label><br>
-        <textarea name="message"></textarea><br><br>
-        
-        <button type="submit">ارسال درخواست کمک</button>
-    </form>
+        <form action="https://formspree.io/f/mqazqjvz" method="POST">
+            <label id="lbl-name">Name:</label><br>
+            <input type="text" name="name" required><br><br>
+            
+            <label id="lbl-amount">Donation Amount:</label><br>
+            <input type="number" name="amount" required><br><br>
+            
+            <label id="lbl-msg">Message (Optional):</label><br>
+            <textarea name="message"></textarea><br><br>
+            
+            <button type="submit" id="btn-submit">Send Help Request</button>
+        </form>
+    </div>
+
+    <script>
+        const translations = {
+            'en': { title: "Bank of Human Kindness", desc: "A transparent people-powered financial help system.", name: "Name:", amount: "Donation Amount:", msg: "Message (Optional):", btn: "Send Help Request" },
+            'fa': { title: "بانک مهربانی", desc: "یک سیستم شفاف برای کمک‌های مردمی.", name: "نام شما:", amount: "مبلغ کمک:", msg: "توضیحات (اختیاری):", btn: "ارسال درخواست کمک" }
+        };
+
+        function changeLang(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'fa') ? 'rtl' : 'ltr';
+            document.getElementById('title').innerText = translations[lang].title;
+            document.getElementById('desc').innerText = translations[lang].desc;
+            document.getElementById('lbl-name').innerText = translations[lang].name;
+            document.getElementById('lbl-amount').innerText = translations[lang].amount;
+            document.getElementById('lbl-msg').innerText = translations[lang].msg;
+            document.getElementById('btn-submit').innerText = translations[lang].btn;
+        }
+    </script>
 </body>
 </html>
