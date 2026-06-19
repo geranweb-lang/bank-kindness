@@ -5,50 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank of Human Kindness</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; max-width: 600px; margin: 40px auto; padding: 20px; }
-        .lang-switch { margin-bottom: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 700px; margin: 40px auto; padding: 25px; background-color: #f4f7f6; color: #333; }
+        .container { background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .lang-switch { margin-bottom: 30px; text-align: center; }
+        .lang-switch button { padding: 10px 15px; margin: 0 5px; border: none; border-radius: 5px; cursor: pointer; background-color: #007bff; color: white; font-size: 1em; transition: background-color 0.3s ease; }
+        .lang-switch button:hover { background-color: #0056b3; }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 20px; font-size: 2.5em; }
+        p { font-size: 1.1em; margin-bottom: 15px; }
+        #desc { color: #555; text-align: center; margin-bottom: 30px; }
+        form { margin-top: 30px; padding: 25px; background-color: #e9ecef; border-radius: 8px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #444; }
+        input[type="text"], input[type="number"], textarea { width: calc(100% - 22px); padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em; }
+        textarea { min-height: 100px; resize: vertical; }
+        button[type="submit"] { width: 100%; padding: 15px; border: none; border-radius: 5px; background-color: #28a745; color: white; font-size: 1.2em; cursor: pointer; transition: background-color 0.3s ease; }
+        button[type="submit"]:hover { background-color: #218838; }
+        .section { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
+        .section h2 { color: #343a40; margin-bottom: 20px; }
+        ul { list-style: none; padding: 0; }
+        li { background-color: #f8f9fa; margin-bottom: 10px; padding: 15px; border-radius: 5px; border-left: 5px solid #17a2b8; }
+        li strong { color: #0056b3; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="lang-switch">
+            <button onclick="changeLang('en')">English</button> | 
+            <button onclick="changeLang('fa')">فارسی</button>
+        </div>
 
-    <div class="lang-switch">
-        <button onclick="changeLang('en')">English</button> | 
-        <button onclick="changeLang('fa')">فارسی</button>
-    </div>
+        <div id="content">
+            <h1 id="title">Bank of Human Kindness</h1>
+            <p id="desc">A transparent people-powered financial help system.</p>
+            
+            <form action="https://formspree.io/f/mqazqjvz" method="POST">
+                <label id="lbl-name">Name:</label><br>
+                <input type="text" name="name" required><br><br>
+                
+                <label id="lbl-amount">Donation Amount:</label><br>
+                <input type="number" name="amount" required><br><br>
+                
+                <label id="lbl-msg">Message (Optional):</label><br>
+                <textarea name="message"></textarea><br><br>
+                
+                <button type="submit" id="btn-submit">Send Help Request</button>
+            </form>
 
-    <div id="content">
-        <h1 id="title">Bank of Human Kindness</h1>
-        <p id="desc">A transparent people-powered financial help system.</p>
-        
-        <form action="https://formspree.io/f/mqazqjvz" method="POST">
-            <label id="lbl-name">Name:</label><br>
-            <input type="text" name="name" required><br><br>
-            
-            <label id="lbl-amount">Donation Amount:</label><br>
-            <input type="number" name="amount" required><br><br>
-            
-            <label id="lbl-msg">Message (Optional):</label><br>
-            <textarea name="message"></textarea><br><br>
-            
-            <button type="submit" id="btn-submit">Send Help Request</button>
-        </form>
+            <div class="section">
+                <h2 id="about-title">About the Project</h2>
+                <p id="about-content">We are building a transparent platform for community support and financial aid. Every contribution makes a difference, and we are committed to ensuring all funds are used effectively and ethically. Our goal is to foster a community where kindness flows freely and impact is maximized.</p>
+                <p id="transparency-focus">Transparency is our core principle. We aim to provide clear insights into how donations are utilized.</p>
+            </div>
+
+            <div class="section">
+                <h2 id="recent-donations-title">Recent Donations</h2>
+                <ul id="donations-list">
+                    <!-- Donation items will be listed here dynamically -->
+                    <li id="no-donations-msg">No donations yet. Be the first to contribute!</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
         const translations = {
-            'en': { title: "Bank of Human Kindness", desc: "A transparent people-powered financial help system.", name: "Name:", amount: "Donation Amount:", msg: "Message (Optional):", btn: "Send Help Request" },
-            'fa': { title: "بانک مهربانی", desc: "یک سیستم شفاف برای کمک‌های مردمی.", name: "نام شما:", amount: "مبلغ کمک:", msg: "توضیحات (اختیاری):", btn: "ارسال درخواست کمک" }
+            'en': { 
+                title: "Bank of Human Kindness", 
+                desc: "A transparent people-powered financial help system.", 
+                name: "Name:", 
+                amount: "Donation Amount:", 
+                msg: "Message (Optional):", 
+                btn: "Send Help Request",
+                aboutTitle: "About the Project",
+                aboutContent: "We are building a transparent platform for community support and financial aid. Every contribution makes a difference, and we are committed to ensuring all funds are used effectively and ethically. Our goal is to foster a community where kindness flows freely and impact is maximized.",
+                transparencyFocus: "Transparency is our core principle. We aim to provide clear insights into how donations are utilized.",
+                recentTitle: "Recent Donations",
+                noDonations: "No donations yet. Be the first to contribute!"
+            },
+            'fa': { 
+                title: "بانک مهربانی", 
+                desc: "یک سیستم شفاف برای کمک‌های مردمی.", 
+                name: "نام شما:", 
+                amount: "مبلغ کمک (تومان):", 
+                msg: "توضیحات (اختیاری):", 
+                btn: "ارسال درخواست کمک",
+                aboutTitle: "درباره پروژه",
+                aboutContent: "ما در حال ساخت یک پلتفرم شفاف برای حمایت اجتماعی و کمک‌های مالی هستیم. هر کمک مالی تفاوت ایجاد می‌کند و ما متعهد هستیم که اطمینان حاصل کنیم تمام وجوه به طور مؤثر و اخلاقی استفاده می‌شوند. هدف ما ایجاد جامعه‌ای است که در آن مهربانی آزادانه جریان یابد و تأثیر آن به حداکثر برسد.",
+                transparencyFocus: "شفافیت اصل اساسی ماست. ما در تلاشیم تا دیدگاه‌های روشنی در مورد چگونگی استفاده از کمک‌های مالی ارائه دهیم.",
+                recentTitle: "آخرین کمک‌ها",
+                noDonations: "هنوز هیچ کمکی ثبت نشده است. اولین کسی باشید که کمک می‌کنید!"
+            }
         };
 
         function changeLang(lang) {
             document.documentElement.lang = lang;
             document.documentElement.dir = (lang === 'fa') ? 'rtl' : 'ltr';
+            
             document.getElementById('title').innerText = translations[lang].title;
             document.getElementById('desc').innerText = translations[lang].desc;
             document.getElementById('lbl-name').innerText = translations[lang].name;
             document.getElementById('lbl-amount').innerText = translations[lang].amount;
             document.getElementById('lbl-msg').innerText = translations[lang].msg;
             document.getElementById('btn-submit').innerText = translations[lang].btn;
+            document.getElementById('about-title').innerText = translations[lang].aboutTitle;
+            document.getElementById('about-content').innerText = translations[lang].aboutContent;
+            document.getElementById('transparency-focus').innerText = translations[lang].transparencyFocus;
+            document.getElementById('recent-donations-title').innerText = translations[lang].recentTitle;
+            document.getElementById('no-donations-msg').innerText = translations[lang].noDonations;
         }
     </script>
 </body>
